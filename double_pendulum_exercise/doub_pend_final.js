@@ -6,6 +6,25 @@ function setup() {
     pg.background(220);
     pg.translate(width / 4, height / 4);
   
+    createP('L1 (50 - 150)');
+    slider_l1 = createSlider(50, 150, 100);
+    createP('L2 (50 - 150)');
+    slider_l2 = createSlider(50, 150, 75);
+  
+    createP('theta1 (0 - 2PI)');
+    slider_t1 = createSlider(0, 2000*PI, 3000 * PI / 2);
+    createP('theta2 (0 - 2PI)');
+    slider_t2 = createSlider(0, 2000*PI, 1000 * PI);
+  
+    p1 = createP('m1 (5 - 50)');
+    slider_m1 = createSlider(5, 50, 10);
+    createP('m2 (5 - 50)');
+    slider_m2 = createSlider(5, 50, 10);
+
+
+    createP('');
+    var reset_btn = createButton("Apply Changes");
+    reset_btn.mousePressed(resetSketch);
 }
 
 var m1 = 30;
@@ -16,8 +35,8 @@ var l1 = 100;
 var l2 = 100;
 
 let pi = Math.PI;
-var t1 = -pi / 2;
-var t2 = -pi;
+var t1 = 3 * pi/2;
+var t2 = pi;
 
 var x1 = 0;
 var y1 = 0;
@@ -28,6 +47,22 @@ var t = 0;
 
 var w1 = 0;
 var w2 = 0;
+
+
+function resetSketch() {
+    createCanvas(1000, 1000);
+    pg.background(220);
+  
+    l1 = slider_l1.value();
+    l2 = slider_l2.value();
+    t1 = slider_t1.value() / 1000;
+    t2 = slider_t2.value() / 1000;
+    m1 = slider_m1.value();
+    m2 = slider_m2.value();
+    w1 = 0;
+    w2 = 0;
+
+}
 
 
 function ForwardEuler(f, T0, dt, t0) {
